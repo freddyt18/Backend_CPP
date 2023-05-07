@@ -3,6 +3,8 @@
 
 #include <string>
 #include "crow.h"
+#include "../middlewares/User.h"
+#include "../middlewares/dotenv.h"
 
 using namespace std;
 
@@ -18,29 +20,78 @@ namespace CustomRoutes {
                 return this->type;
             };
 
-            auto route_index(crow::SimpleApp& app){
-                string type = this->getType();
+            
+            // Login API with POST that accepts unique headers
+            auto route_login(crow::SimpleApp& app){
 
-                CROW_ROUTE(app, "/").methods("GET"_method)([type](){
-                    auto page = crow::mustache::load("index.html");
-                    
-                    return page.render();
+
+                CROW_ROUTE(app, "/login")
+                .methods("POST"_method)
+                ([&](const crow::request& req){
+                    Data::Dotenv dotenv("../.env");
+                    dotenv.read();
+                    map<string, string> data = dotenv.getData();
+
+                    crow::json::wvalue x;
+
+                    string username = req.get_header_value("username");
+                    string password = req.get_header_value("password");
+
+
+                    if (username == data["USER"] && password == data["PASSWORD"]){
+                        // Create a new user
+                        U::User user("1", username, password);
+
+                        // Create a new session
+                        user.setSession(S::Session("1"));
+
+                        // Creating a json object
+                        
+                        x["status"] = "success";
+                        x["message"] = "Login Successful";
+                        x["user"] = user.getUsername();
+                        x["session"] = user.getSession().getId();
+                        
+                    } else {
+                        
+                        x["status"] = "error";
+                        x["message"] = "Login Failed";
+
+                    }
+
+                    return x;
                 });
+                
             };
 
-            auto route_add(crow::SimpleApp& app){
-                string type = this->getType();
 
-                CROW_ROUTE(app, "/add/<int>/<int>").methods("GET"_method)([type](const crow::request& req, int a, int b){
+            // Retrieve data from .env
+            auto route_env(crow::SimpleApp& app){
+                CROW_ROUTE(app, "/env")
+                .methods("GET"_method)
+                ([&](const crow::request& req){
+
+                    // Create a new json object
                     crow::json::wvalue x;
-                    x["a"] = a;
-                    x["b"] = b;
-                    x["sum"] = a + b;
-                    x["type"] = type;
-                    
+
+                    // Create a new dotenv object
+                    Data::Dotenv dotenv("../.env");
+
+                    // Read data from .env file
+                    dotenv.read();
+
+                    // Get data from .env file
+                    map<string, string> data = dotenv.getData();
+
+                    // Serialize the map into json using for each
+                    for (auto& kv : data) {
+                        x[kv.first] = kv.second;
+                    }
+
                     return x;
                 });
             };
+
 
         private:
             string type;
