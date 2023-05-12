@@ -9,13 +9,13 @@ pipeline {
             }
         }
 
-        stages('Build Image') {
+        stage('Build Image') {
             steps {
                 sh 'docker build -t backend_cpp:latest .'
             }
         }
 
-        stages('Containerize Image') {
+        stage('Containerize Image') {
             steps {
                 sh 'docker rm -f backend_cpp'
                 sh 'docker run -d --name backend_cpp -p 18080:18080 backend_cpp:latest'
