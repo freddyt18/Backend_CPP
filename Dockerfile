@@ -9,6 +9,8 @@ COPY . /app
 # Run the sh install script
 RUN chmod +x tools.sh && ./tools.sh
 
+# Go back to the working directory
+RUN cd /app
 
 # Build the app
 RUN mkdir build && \ 
