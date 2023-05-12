@@ -16,7 +16,8 @@ RUN apt-get update && apt-get install -y \
  git \
  wget \
  g++ \
- pkg-config
+ pkg-config \
+ linux-libc-dev
 
 # Other tools
 RUN apt-get install -y zip unzip tar
