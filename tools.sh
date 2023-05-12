@@ -14,6 +14,7 @@ if [ ! -d "vcpkg" ]; then
     cd /
     # Install vcpkg
     git clone https://github.com/Microsoft/vcpkg.git && \
+        chmod +x vcpkg/bootstrap-vcpkg.sh && \
         ./vcpkg/bootstrap-vcpkg.sh && \
         export PATH=$(pwd):$PATH
 fi
