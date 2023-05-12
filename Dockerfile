@@ -49,7 +49,7 @@ RUN cd /app
 EXPOSE 18080
 
 # Build and run the app
-RUN mkdir build && cd build && cmake -DCMAKE_TOOLCHAIN_FILE="/vcpkg/scripts/buildsystems/vcpkg.cmake" .. && cmake --build .
+RUN mkdir build && cd build && cmake -DCMAKE_TOOLCHAIN_FILE="/vcpkg/scripts/buildsystems/vcpkg.cmake" .. && cmake --build . && chmod +x main
 
 # Run the app
-CMD ["./main"]
+CMD ["./build/main"]
