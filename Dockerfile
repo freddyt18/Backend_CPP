@@ -21,7 +21,8 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get install -y zip unzip tar
 
 # Install vcpkg
-RUN cd / && git clone https://github.com/Microsoft/vcpkg.git && \
+RUN cd / && \ 
+    git clone https://github.com/Microsoft/vcpkg.git && \
     cd vcpkg && \
     chmod +x bootstrap-vcpkg.sh && \
     ./bootstrap-vcpkg.sh && \
@@ -37,7 +38,7 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.26.3/cmake-3.26.3
 RUN cmake -version
 
 # Install Crow from vcpkg
-RUN vcpkg install crow
+RUN ./vcpkg/vcpkg install crow
 
 # cd to working directory
 RUN cd /app
