@@ -1,5 +1,8 @@
 FROM ubuntu
 
+# Set root user
+USER root
+
 # Set the working directory
 WORKDIR /app
 
@@ -18,7 +21,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get install -y zip unzip tar
 
 # Install vcpkg
-RUN cd /usr && git clone https://github.com/Microsoft/vcpkg.git && \
+RUN cd / && git clone https://github.com/Microsoft/vcpkg.git && \
     cd vcpkg && \
     chmod +x bootstrap-vcpkg.sh && \
     ./bootstrap-vcpkg.sh && \
