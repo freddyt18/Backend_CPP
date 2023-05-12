@@ -6,6 +6,8 @@ apt-get update && apt-get install -y \
     vim \
     g++
 
+# Other tools
+apt-get install zip unzip tar
 
 # Check if vcpgk is installed, if not installed, run the following commands
 if [ ! -d "vcpkg" ]; then
