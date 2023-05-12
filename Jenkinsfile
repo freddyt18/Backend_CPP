@@ -1,11 +1,14 @@
 pipeline {
+    agent {
+        label 'master'
+    }
     stages {
         stage('Updating Resources') {
             steps {
                 sh 'git pull origin master'
             }
         }
-        
+
         stages('Build Image') {
             steps {
                 sh 'docker build -t backend_cpp:latest .'
