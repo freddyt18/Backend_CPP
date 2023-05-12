@@ -7,7 +7,7 @@ apt-get update && apt-get install -y \
     g++
 
 # Other tools
-apt-get install zip unzip tar
+apt-get install -y zip unzip tar
 
 # Check if vcpgk is installed, if not installed, run the following commands
 if [ ! -d "vcpkg" ]; then
