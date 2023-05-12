@@ -35,4 +35,17 @@ cmake -version
 # Install Crow from vcpkg
 vcpkg install crow
 
+# Build and run the app
 
+# Check if build folder exists, if not, create itm it exists, delete it and create a new one
+if [ -d "build" ]; then
+    rm -rf build
+fi
+mkdir build
+cd build
+
+cmake -DCMAKE_TOOLCHAIN_FILE="/vcpkg/scripts/buildsystems/vcpkg.cmake" ..
+cmake --build .
+
+# Run the app
+./main

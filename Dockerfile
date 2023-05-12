@@ -12,16 +12,9 @@ RUN chmod +x tools.sh && ./tools.sh
 # Go back to the working directory
 RUN cd /app
 
-# Build the app
-RUN mkdir build && \ 
-    cd build && \
-    cmake -DCMAKE_TOOLCHAIN_FILE="/vcpkg/scripts/buildsystems/vcpkg.cmake" .. && \
-    cmake --build .
-
-
 # Expose the app to 18080
 EXPOSE 18080
 
 # Set the default command to run the application
-CMD ["./build/main"]
+CMD ["./tools.sh"]
 
