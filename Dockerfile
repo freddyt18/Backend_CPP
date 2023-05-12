@@ -38,7 +38,7 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.26.3/cmake-3.26.3
 RUN cmake -version
 
 # Install Crow from vcpkg
-RUN ./vcpkg/vcpkg install crow
+RUN cd / && vcpkg install crow
 
 # cd to working directory
 RUN cd /app
