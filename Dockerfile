@@ -40,7 +40,7 @@ ENV PATH="/usr/local/bin:${PATH}"
 RUN cmake -version
 
 # Install packages
-RUN vcpkg install crow && vcpkg install openssl
+RUN vcpkg update && vcpkg install crow openssl
 
 # cd to working directory
 RUN cd /app
