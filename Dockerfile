@@ -3,11 +3,12 @@ FROM ubuntu
 # Set the working directory
 WORKDIR /app
 
+# Copy the current directory contents into the container at /app
+COPY . /app
+
 # Run the sh install script
 RUN chmod +x tools.sh && ./tools.sh
 
-# Copy the current directory contents into the container at /app
-COPY . /app
 
 # Build the app
 RUN mkdir build && \ 
