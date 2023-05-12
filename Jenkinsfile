@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'web'
+    }
     stages {
         stage('Build Image') {
             steps {
