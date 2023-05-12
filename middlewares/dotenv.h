@@ -49,6 +49,10 @@ namespace Data {
                     string key, value;
                     if (getline(iss, key, '=') && getline(iss, value))
                     {
+                        // If the value contains " anywhere in the text then we replace them with empty string
+                        if (value.find("\"") != string::npos){
+                            value.erase(remove(value.begin(), value.end(), '\"'), value.end());
+                        }
                         this->data[key] = value;
                     }
                 }

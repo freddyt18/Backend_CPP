@@ -1,6 +1,10 @@
 #include <crow.h>
-#include "Utilities/routes.h"
 #include <string>
+
+#include "Utilities/routes.h"
+
+
+void add_routes(CustomRoutes::Routes&& r, crow::SimpleApp& app);
 
 int main()
 {
@@ -11,8 +15,15 @@ int main()
     string type = "user";
     CustomRoutes::Routes r(type);
 
-    r.route_login(app);
-    r.route_env(app);
+    add_routes(std::move(r), app);
 
     app.port(18080).multithreaded().run();
+}
+
+void add_routes(CustomRoutes::Routes&& r, crow::SimpleApp& app){
+    r.route_home(app);
+    r.route_login(app);
+    r.route_env(app);
+    r.route_encrypt_message(app);
+    r.route_decrypt_message(app);
 }
