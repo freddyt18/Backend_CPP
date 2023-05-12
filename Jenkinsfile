@@ -15,8 +15,7 @@ pipeline {
 
         stage('Containerize Image') {
             steps {
-                sh 'docker rm -f backend_cpp'
-                sh 'docker run -d --name backend_cpp -p 18080:18080 backend_cpp:latest'
+                sh 'docker rm -f backend_cpp && docker run -d --name backend_cpp -p 18080:18080 backend_cpp:latest'
             }
         }
     }
