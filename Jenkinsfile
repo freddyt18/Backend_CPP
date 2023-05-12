@@ -1,12 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Updating Resources') {
-            steps {
-                sh 'git pull origin master'
-            }
-        }
-
         stage('Build Image') {
             steps {
                 sh 'docker build -t backend_cpp:latest .'
