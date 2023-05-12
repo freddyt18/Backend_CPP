@@ -28,3 +28,6 @@ if [ ! -d "cmake-3.26.3-Linux-x86_64" ]; then
         export PATH=$(pwd):$PATH
 fi
 
+# Testing CMake
+cmake -version
+
