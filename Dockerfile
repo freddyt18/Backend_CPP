@@ -46,11 +46,7 @@ RUN cd / && vcpkg install crow
 RUN cd /app
 
 # Build and run the app
-RUN mkdir build
-WORKDIR /build
-
-RUN cmake -DCMAKE_TOOLCHAIN_FILE="/vcpkg/scripts/buildsystems/vcpkg.cmake" ..
-RUN cmake --build .
+RUN mkdir build && cd /build && cmake -DCMAKE_TOOLCHAIN_FILE="/vcpkg/scripts/buildsystems/vcpkg.cmake" .. && cmake --build .
 
 # Run the app
 CMD ["./main"]
