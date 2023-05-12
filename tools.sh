@@ -25,8 +25,8 @@ if [ ! -d "cmake-3.26.3-Linux-x86_64" ]; then
     # Install CMake
     curl -O https://github.com/Kitware/CMake/releases/download/v3.26.3/cmake-3.26.3-linux-x86_64.sh && \
         chmod +x *.sh && \
-        ./cmake-3.26.3-linux-x86_64.sh --skip-license --prefix=/usr/local && \
-        cd bin
+        ./cmake-3.26.3-linux-x86_64.sh --skip-license --prefix=/root && \
+        cd /root/cmake-3.26.3-linux-x86_64/bin && \
         export PATH=$(pwd):$PATH
 fi
 
