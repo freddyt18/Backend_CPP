@@ -45,6 +45,9 @@ RUN cd / && vcpkg install crow
 # cd to working directory
 RUN cd /app
 
+# Export the port
+EXPOSE 18080
+
 # Build and run the app
 RUN mkdir build && cd build && cmake -DCMAKE_TOOLCHAIN_FILE="/vcpkg/scripts/buildsystems/vcpkg.cmake" .. && cmake --build .
 
