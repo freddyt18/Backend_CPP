@@ -12,8 +12,7 @@ COPY . /app
 # Build the app
 RUN mkdir build && \ 
     cd build && \
-    cmake -DCMAKE_TOOLCHAIN_FILE="/vcpkg/scripts/buildsystems/vcpkg.cmake" ..
-&& \
+    cmake -DCMAKE_TOOLCHAIN_FILE="/vcpkg/scripts/buildsystems/vcpkg.cmake" .. && \
     cmake --build .
 
 
