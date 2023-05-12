@@ -27,8 +27,8 @@ RUN cd / && git clone https://github.com/Microsoft/vcpkg.git && \
 # Install CMake
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.26.3/cmake-3.26.3-linux-x86_64.sh && \
     chmod +x *.sh && \
-    ./cmake-3.26.3-linux-x86_64.sh --skip-license --prefix=/root/cmake && \
-    export PATH=/root/cmake/bin:$PATH
+    ./cmake-3.26.3-linux-x86_64.sh --skip-license --prefix=/home/cmake && \
+    export PATH=/home/cmake/bin:$PATH
 
 # Testing CMake
 RUN cmake -version
