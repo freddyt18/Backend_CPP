@@ -26,6 +26,7 @@ if [ ! -d "cmake-3.26.3-Linux-x86_64" ]; then
     curl -O https://github.com/Kitware/CMake/releases/download/v3.26.3/cmake-3.26.3-linux-x86_64.sh && \
         chmod +x *.sh && \
         ./cmake-3.26.3-linux-x86_64.sh --skip-license --prefix=/usr/local && \
+        cd bin
         export PATH=$(pwd):$PATH
 fi
 
