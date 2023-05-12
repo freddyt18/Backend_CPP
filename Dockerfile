@@ -25,14 +25,16 @@ RUN cd / && \
     git clone https://github.com/Microsoft/vcpkg.git && \
     cd vcpkg && \
     chmod +x bootstrap-vcpkg.sh && \
-    ./bootstrap-vcpkg.sh && \
-    export PATH=$(pwd):$PATH
+    ./bootstrap-vcpkg.sh
+
+ENV PATH="/vcpkg:${PATH}"
 
 # Install CMake
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.26.3/cmake-3.26.3-linux-x86_64.sh && \
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.26.3/cmake-3.26.3-linux-x86_64.sh && \ 
     chmod +x *.sh && \
-    ./cmake-3.26.3-linux-x86_64.sh --skip-license --prefix=/usr/local && \
-    export PATH=/usr/local/bin:$PATH
+    ./cmake-3.26.3-linux-x86_64.sh --skip-license --prefix=/usr/local
+
+ENV PATH="/usr/local/bin:${PATH}"
 
 # Testing CMake
 RUN cmake -version
@@ -52,5 +54,3 @@ RUN cmake --build .
 
 # Run the app
 CMD ["./main"]
-
-
