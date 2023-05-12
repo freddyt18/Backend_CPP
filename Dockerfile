@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
  build-essential \
  curl \
  git \
+ wget \
  g++
 
 # Other tools
@@ -23,36 +24,29 @@ RUN cd / && git clone https://github.com/Microsoft/vcpkg.git && \
     ./bootstrap-vcpkg.sh && \
     export PATH=$(pwd):$PATH
 
-# # Install CMake
-# RUN curl -O https://github.com/Kitware/CMake/releases/download/v3.26.3/cmake-3.26.3-linux-x86_64.sh && \
-#     chmod +x *.sh && \
-#     ./cmake-3.26.3-linux-x86_64.sh --skip-license -y && \
-#     cd /root/cmake-3.26.3-linux-x86_64/bin && \
-#     export PATH=$(pwd):$PATH
-
 # Install CMake
-RUN curl -O https://github.com/Kitware/CMake/releases/download/v3.26.3/cmake-3.26.3-linux-x86_64.sh && \
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.26.3/cmake-3.26.3-linux-x86_64.sh && \
     chmod +x *.sh && \
-    ./cmake-3.26.3-linux-x86_64.sh --skip-license -y && \
-    ls /root
+    ./cmake-3.26.3-linux-x86_64.sh --skip-license --prefix=/root/cmake && \
+    export PATH=/root/cmake/bin:$PATH
 
-# # Testing CMake
-# RUN cmake -version
+# Testing CMake
+RUN cmake -version
 
-# # Install Crow from vcpkg
-# RUN vcpkg install crow
+# Install Crow from vcpkg
+RUN vcpkg install crow
 
-# # cd to working directory
-# RUN cd /app
+# cd to working directory
+RUN cd /app
 
-# # Build and run the app
-# RUN mkdir build
-# WORKDIR /build
+# Build and run the app
+RUN mkdir build
+WORKDIR /build
 
-# RUN cmake -DCMAKE_TOOLCHAIN_FILE="/vcpkg/scripts/buildsystems/vcpkg.cmake" ..
-# RUN cmake --build .
+RUN cmake -DCMAKE_TOOLCHAIN_FILE="/vcpkg/scripts/buildsystems/vcpkg.cmake" ..
+RUN cmake --build .
 
-# # Run the app
-# CMD ["./main"]
+# Run the app
+CMD ["./main"]
 
 
