@@ -20,9 +20,6 @@ if [ ! -d "vcpkg" ]; then
         export PATH=$(pwd):$PATH
 fi
 
-# Install Crow from vcpkg
-vcpkg install crow
-
 # Check if CMake is installed, if not installed, run the following commands
 if [ ! -d "cmake-3.26.3-Linux-x86_64" ]; then
     # Install CMake
@@ -34,4 +31,8 @@ fi
 
 # Testing CMake
 cmake -version
+
+# Install Crow from vcpkg
+vcpkg install crow
+
 
