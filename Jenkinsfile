@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'web'
+        label 'main'
     }
     stages {
         stage('Create .env'){
