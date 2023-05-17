@@ -6,7 +6,8 @@ pipeline {
         stage('Create .env'){
             steps {
                 sh """
-                    echo 'HOST=${HOST}\nUSERNAME=${USERNAME}\nPASSWORD=${PASSWORD}\nDATABASE=${DATABASE}' > .env
+                    touch .env && \\
+                    echo 'HOST=${HOST}\nUSERNAME=${USERNAME}\nPASSWORD=${PASSWORD}\nDATABASE=${DATABASE}' > .env 
                 """
             }
         }
