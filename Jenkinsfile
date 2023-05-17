@@ -3,6 +3,13 @@ pipeline {
         label 'web'
     }
     stages {
+        stage('Create .env'){
+            steps {
+                sh """
+                    echo 'HOST=${HOST}\nUSERNAME=${USERNAME}\nPASSWORD=${PASSWORD}\nDATABASE=${DATABASE}' > .env
+                """
+            }
+        }
         stage('Build Image') {
             steps {
                 sh 'docker build -t backend_cpp:latest .'

@@ -1,9 +1,14 @@
+#ifndef Hashing_H
+#define Hashing_H
+
 #include <openssl/des.h>
 #include <openssl/bio.h>
 #include <openssl/evp.h>
 #include <openssl/buffer.h>
 #include <string>
 #include <vector>
+#include <regex>
+
 
 class TripleDes {
 public:
@@ -60,6 +65,19 @@ public:
     }
 
     std::string decrypt(const std::string& encoded) {
+        // Validating the encoded string with a regex
+        std::cout << "String: " << encoded << std::endl;
+        std::regex base64_regex("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$");
+        if (!std::regex_match(encoded, base64_regex)) {
+            throw std::runtime_error("Invalid Base64 Encoding");
+        }
+
+        // Validating the encoded string : padding = right length
+        if (encoded.size() % 4 != 0) {
+            throw std::runtime_error("Incorrect padding.");
+        }
+        
+
         // Create a memory BIO to hold the Base64 encoded data
         BIO* b64 = BIO_new(BIO_f_base64());
         BIO_set_flags(b64, BIO_FLAGS_BASE64_NO_NL);
@@ -108,3 +126,6 @@ private:
     TripleDes(const TripleDes&) = delete;
     void operator=(const TripleDes&) = delete;
 };
+
+
+#endif

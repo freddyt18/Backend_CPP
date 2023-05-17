@@ -42,7 +42,7 @@ ENV PATH="/usr/local/bin:${PATH}"
 RUN cmake -version
 
 # Install packages
-RUN vcpkg update && vcpkg install crow openssl
+RUN vcpkg update && vcpkg install crow openssl boost boost-mysql mailio
 
 # cd to working directory
 RUN cd /app
