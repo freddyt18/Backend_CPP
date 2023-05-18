@@ -19,7 +19,7 @@ pipeline {
 
         stage('Containerize Image') {
             steps {
-                sh 'sudo docker rm -f backend_cpp && docker run -d --name backend_cpp -p 18080:18080 backend_cpp:latest'
+                sh 'sudo docker rm -f backend_cpp && docker run -d --name backend_cpp -p 18080:18080 -v /root/tools/vcpkg:/vcpkg backend_cpp:latest'
             }
         }
     }

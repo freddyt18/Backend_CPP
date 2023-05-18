@@ -22,12 +22,12 @@ RUN apt-get update && apt-get install -y \
 # Other tools
 RUN apt-get install -y zip unzip tar
 
-# Install vcpkg
-RUN cd / && \ 
-    git clone https://github.com/Microsoft/vcpkg.git && \
-    cd vcpkg && \
-    chmod +x bootstrap-vcpkg.sh && \
-    ./bootstrap-vcpkg.sh
+# # Install vcpkg
+# RUN cd / && \ 
+#     git clone https://github.com/Microsoft/vcpkg.git && \
+#     cd vcpkg && \
+#     chmod +x bootstrap-vcpkg.sh && \
+#     ./bootstrap-vcpkg.sh
 
 ENV PATH="/vcpkg:${PATH}"
 
@@ -42,7 +42,7 @@ ENV PATH="/usr/local/bin:${PATH}"
 RUN cmake -version
 
 # Install packages
-RUN vcpkg update && vcpkg install crow openssl boost boost-mysql mailio
+# RUN vcpkg update && vcpkg install crow openssl boost boost-mysql mailio
 
 # cd to working directory
 RUN cd /app

@@ -15,6 +15,7 @@ int main()
     Database::Connector conn;
     conn.setup();
     
+    // Set up routes
     CustomRoutes::Routes r;
     r.route_bind(app);
 
