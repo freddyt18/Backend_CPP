@@ -29,6 +29,8 @@ RUN apt-get install -y zip unzip tar
 #     chmod +x bootstrap-vcpkg.sh && \
 #     ./bootstrap-vcpkg.sh
 
+VOLUME /vcpkg
+
 ENV PATH="/vcpkg:${PATH}"
 
 # Install CMake
@@ -51,9 +53,7 @@ RUN cd /app
 EXPOSE 18080
 
 # Build and run the app
-# RUN mkdir build && cd build && cmake -DCMAKE_TOOLCHAIN_FILE="/vcpkg/scripts/buildsystems/vcpkg.cmake" .. && cmake --build . && chmod +x main
-
-RUN ls /vcpkg
+RUN mkdir build && cd build && cmake -DCMAKE_TOOLCHAIN_FILE="/vcpkg/scripts/buildsystems/vcpkg.cmake" .. && cmake --build . && chmod +x main
 
 # Run the app
 CMD ["./build/main"]
