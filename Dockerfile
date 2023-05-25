@@ -29,9 +29,9 @@ RUN cd / && \
     chmod +x bootstrap-vcpkg.sh && \
     ./bootstrap-vcpkg.sh
 
-VOLUME /vcpkg
+# VOLUME /vcpkg
 
-ENV PATH="/vcpkg:${PATH}"
+# ENV PATH="/vcpkg:${PATH}"
 
 # Install CMake
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.26.3/cmake-3.26.3-linux-x86_64.sh && \ 

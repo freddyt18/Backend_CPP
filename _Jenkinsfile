@@ -1,0 +1,27 @@
+pipeline{
+    agent {
+        label 'main'
+    }
+
+    stages {
+        stage('Alert Telegram'){
+            steps {
+                sh """
+                    ansible-playbook playbooks/backend_cpp/00_alert.yml -e "telegram_token=${telegram_token}" -vvv
+                """
+            }
+        }
+
+        stage('Build Docker Image and Push to DockerHub'){
+            steps {
+                sh '''
+                    ansible-playbook playbooks/backend_cpp/01_docker_hub.yml -vvv
+                '''
+            }
+        }
+
+        
+
+
+    }
+}
