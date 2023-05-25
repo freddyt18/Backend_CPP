@@ -22,12 +22,12 @@ RUN apt-get update && apt-get install -y \
 # Other tools
 RUN apt-get install -y zip unzip tar
 
-# # Install vcpkg
-# RUN cd / && \ 
-#     git clone https://github.com/Microsoft/vcpkg.git && \
-#     cd vcpkg && \
-#     chmod +x bootstrap-vcpkg.sh && \
-#     ./bootstrap-vcpkg.sh
+# -- Install vcpkg
+RUN cd / && \ 
+    git clone https://github.com/Microsoft/vcpkg.git && \
+    cd vcpkg && \
+    chmod +x bootstrap-vcpkg.sh && \
+    ./bootstrap-vcpkg.sh
 
 VOLUME /vcpkg
 
@@ -43,8 +43,8 @@ ENV PATH="/usr/local/bin:${PATH}"
 # Testing CMake
 RUN cmake -version
 
-# Install packages
-# RUN vcpkg update && vcpkg install crow openssl boost boost-mysql mailio
+# -- Install packages
+RUN vcpkg update && vcpkg install crow openssl boost boost-mysql mailio
 
 # cd to working directory
 RUN cd /app
@@ -52,8 +52,8 @@ RUN cd /app
 # Export the port
 EXPOSE 18080
 
-# Build and run the app
-# RUN mkdir build && cd build && cmake -DCMAKE_TOOLCHAIN_FILE="/vcpkg/scripts/buildsystems/vcpkg.cmake" .. && cmake --build . && chmod +x main && ./build/main
+# -- Build and run the app
+RUN mkdir build && cd build && cmake -DCMAKE_TOOLCHAIN_FILE="/vcpkg/scripts/buildsystems/vcpkg.cmake" .. && cmake --build . && chmod +x main && ./build/main
 
 # Run the app
 CMD ["/bin/bash"]
