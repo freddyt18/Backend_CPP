@@ -106,10 +106,16 @@ namespace Database {
                 // Store the data in a map
                 auto r_ = r.rows();
 
+                // Testing
+                std::cout << "Debug 7.3" << std::endl;
+
                 // Cout
                 for(auto Q : r_){
                     std::cout << Q[0].get_string() << std::endl;
                 }
+
+                // Testing
+                std::cout << "Debug 7.4" << std::endl;
 
                 // Store data
                 int start = 0;
@@ -137,6 +143,9 @@ namespace Database {
                     (*result)[std::to_string(start)] = data;
                     start++;
                 }
+
+                // Testing
+                std::cout << "Debug 7.5" << std::endl;
 
                 conn.close();
                 return 0;
