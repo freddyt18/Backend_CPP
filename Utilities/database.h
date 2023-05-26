@@ -100,22 +100,16 @@ namespace Database {
                 boost::mysql::results r;
                 conn.query(query, r);
 
-                // Testing
-                std::cout << "Debug 7.2" << std::endl;
 
                 // Store the data in a map
                 auto r_ = r.rows();
 
-                // Testing
-                std::cout << "Debug 7.3" << std::endl;
 
                 // // Cout
                 // for(auto Q : r_){
                 //     std::cout << Q[0].get_string() << std::endl;
                 // }
 
-                // Testing
-                std::cout << "Debug 7.4" << std::endl;
 
                 // Store data
                 int start = 0;
@@ -144,8 +138,6 @@ namespace Database {
                     start++;
                 }
 
-                // Testing
-                std::cout << "Debug 7.5" << std::endl;
 
                 conn.close();
                 return 0;
