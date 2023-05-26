@@ -13,6 +13,7 @@
 #include <boost/system/system_error.hpp>
 
 #include "../middlewares/dotenv.h"
+#include "time.h"
 
 
 namespace Database {
@@ -59,6 +60,8 @@ namespace Database {
                         `sessionID` int NOT NULL AUTO_INCREMENT,
                         `userID` int NOT NULL UNIQUE,
                         `content` VARCHAR(255) NOT NULL,
+                        `expiration` VARCHAR(255) NOT NULL,
+                        `expiration_raw` int NOT NULL,
                         PRIMARY KEY (`sessionID`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
                 )");
@@ -110,6 +113,7 @@ namespace Database {
 
 
                 // Store data
+                //// To use this data, declare map<string, map<string,string>>
                 int start = 0;
                 int end = r_.size() - 1;
                 for(auto row : r_){
@@ -129,6 +133,11 @@ namespace Database {
                             data[std::to_string(i)] = std::to_string(row[i].get_int64());
                             continue;
                         }
+
+                        // if(row[i].is_datetime()){
+                        //     data[std::to_string(i)] = std::to_string(row[i].get_datetime().year());
+                        //     continue;
+                        // }
 
                         // data[std::to_string(i)] = row[i];
                     }

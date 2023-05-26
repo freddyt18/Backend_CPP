@@ -16,7 +16,7 @@ find_package(mailio CONFIG REQUIRED)
 # set(VCPKG_TARGET_TRIPLET "x64-windows" CACHE STRING "VCPKG Target Triplet to use")
 
 
-# add_executable(main ./Test/database.cpp) 
+# add_executable(main ./Test/time.cpp) 
 add_executable(main main.cpp) 
 
 target_link_libraries(main PUBLIC Crow::Crow)

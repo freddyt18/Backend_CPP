@@ -10,6 +10,8 @@
 #include "../Utilities/database.h"
 #include <map>
 
+#include "../Utilities/time.h"
+
 using namespace std;
 
 
@@ -82,12 +84,17 @@ class Login : public Error {
             // Retrieve the userID from the database
             conn.query_read("SELECT userID FROM backend_users WHERE username LIKE '" + username + "';", &result);
 
-
             string userID = result["0"]["0"];
 
 
+            // Retrieve the date and time
+            string raw, formatted;
+            Time t_;
+            t_.from_now(30, &formatted, &raw);
+
+
             // Store the userID in the session
-            conn.query_insert("INSERT INTO backend_user_session (content, userID) VALUES ('" + content + "', '" + userID + "');");
+            conn.query_insert("INSERT INTO backend_user_session (content, userID, expiration, expiration_raw) VALUES ('" + content + "', '" + userID + "', '" + formatted + "', " + raw + ");");
 
 
             // Return the session cookie
