@@ -27,6 +27,9 @@ class Login : public Error {
                 return false;
             }
 
+            // Testing
+            cout << "Debug 2" << endl;
+
 
             // Convert the characters to HTML entities to prevent XSS attacks.
             HTMLEntities e;
@@ -41,6 +44,10 @@ class Login : public Error {
             map<string, map<string,string>> result;
             
             conn.query_read("SELECT password FROM backend_users WHERE username LIKE '" + username + "';", &result);
+
+            // Testing
+            cout << "Debug 3" << endl;
+            cout << result["0"]["0"] << endl;
             
 
             // If the username is not found in the database, we'll send a message via the pointer
@@ -50,6 +57,9 @@ class Login : public Error {
 
                 return false;
             }
+
+            // Testing
+            cout << "Debug 4" << endl;
 
             // Store the result in a variable
             string password_from_db = result["0"]["0"];
@@ -63,6 +73,9 @@ class Login : public Error {
             // Convert the input password to hash
             TripleDes& t = TripleDes::getInstance();
             string password_hash = t.encrypt(password);
+
+            // Testing
+            cout << "Debug 5" << endl;
 
             // Compare the password from the database with the input password
             if (password_from_db != password_hash) {
@@ -108,6 +121,9 @@ class Login : public Error {
 
                         return x;
                     }
+
+                    // Testing
+                    cout << "Debug 1" << endl;
 
                     // Validate the input
                     auto json = crow::json::load(req.body);
