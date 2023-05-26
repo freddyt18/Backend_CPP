@@ -109,10 +109,10 @@ namespace Database {
                 // Testing
                 std::cout << "Debug 7.3" << std::endl;
 
-                // Cout
-                for(auto Q : r_){
-                    std::cout << Q[0].get_string() << std::endl;
-                }
+                // // Cout
+                // for(auto Q : r_){
+                //     std::cout << Q[0].get_string() << std::endl;
+                // }
 
                 // Testing
                 std::cout << "Debug 7.4" << std::endl;
