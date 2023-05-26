@@ -85,17 +85,32 @@ class Login : public Error {
                 return false;
             }
 
+            // Testing
+            cout << "Debug 6" << endl;
+
             // Register the userID in the session by randomizing the content of the session cookie
             string content = t.encrypt(username + password_hash);
+
+            // Testing
+            cout << "Debug 7" << endl;
 
             // Retrieve the userID from the database
             conn.query_read("SELECT userID FROM backend_users WHERE username LIKE '" + username + "';", &result);
 
+            // Testing
+            cout << "Debug 8" << endl;
+
             string userID = result["0"]["0"];
+
+            // Testing
+            cout << "Debug 9" << endl;
 
 
             // Store the userID in the session
             conn.query_insert("INSERT INTO backend_user_session (content, userID) VALUES ('" + content + "', '" + userID + "');");
+
+            // Testing
+            cout << "Debug 10" << endl;
 
             // Return the session cookie
             (*x)["status"] = "success";
