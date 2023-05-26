@@ -93,9 +93,15 @@ namespace Database {
                 // Connect to the server using the first endpoint returned by the resolver
                 conn.connect(*endpoints.begin(), params);
 
+                // Testing
+                std::cout << "Debug 7.1" << std::endl;
+
                 // Execute a simple query
                 boost::mysql::results r;
                 conn.query(query, r);
+
+                // Testing
+                std::cout << "Debug 7.2" << std::endl;
 
                 // Store the data in a map
                 auto r_ = r.rows();
